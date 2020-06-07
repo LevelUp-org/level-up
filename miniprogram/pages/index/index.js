@@ -3,118 +3,96 @@ const app = getApp()
 
 Page({
   data: {
-    avatarUrl: './user-unlogin.png',
-    userInfo: {},
-    logged: false,
-    takeSession: false,
-    requestResult: ''
+    list: [
+      {
+        id: 0,
+        type: 'Web',
+        name: 'Web',
+        open: true,
+        items: [
+          {
+            type: 'css',
+            name: 'css',
+            count: 198,
+          },
+          {
+            type: 'js',
+            name: 'js',
+            count: 190,
+          },
+          {
+            type: 'html',
+            name: 'html',
+            count: 190,
+          },
+          {
+            type: 'react',
+            name: 'react',
+            count: 190,
+          },
+          {
+            type: 'Vue',
+            name: 'Vue',
+            count: 190,
+          }
+        ]
+      },
+      {
+        id: 1,
+        type: 'Hybrid',
+        name: 'Hybrid',
+        open: false,
+        items: [
+          {
+            type: 'Flutter',
+            name: 'Flutter',
+            count: 190,
+          },
+          {
+            type: 'react-native',
+            name: 'react-native',
+            count: 190,
+          },
+        ]
+      },
+      {
+        id: 2,
+        type: 'Native',
+        name: 'Native',
+        open: false,
+        items: [
+          {
+            type: 'iOS',
+            name: 'iOS',
+            count: 190,
+          },
+          {
+            type: 'Android',
+            name: 'Android',
+            count: 19112,
+          }
+        ]
+      },
+    ]
   },
 
   onLoad: function() {
-    if (!wx.cloud) {
-      wx.redirectTo({
-        url: '../chooseLib/chooseLib',
-      })
-      return
+  },
+
+  kindToggle(e) {
+    const id = e.currentTarget.id;
+    console.log(id);
+    const list = this.data.list;
+    for (let i = 0, len = list.length; i < len; ++i) {
+      console.log(id, '====',list[i].id);
+      if (list[i].id == id) {
+        list[i].open = !list[i].open
+      } else {
+        list[i].open = false
+      }
     }
-
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              this.setData({
-                avatarUrl: res.userInfo.avatarUrl,
-                userInfo: res.userInfo
-              })
-            }
-          })
-        }
-      }
+    this.setData({
+      list
     })
   },
-
-  onGetUserInfo: function(e) {
-    if (!this.data.logged && e.detail.userInfo) {
-      this.setData({
-        logged: true,
-        avatarUrl: e.detail.userInfo.avatarUrl,
-        userInfo: e.detail.userInfo
-      })
-    }
-  },
-
-  onGetOpenid: function() {
-    // 调用云函数
-    wx.cloud.callFunction({
-      name: 'login',
-      data: {},
-      success: res => {
-        console.log('[云函数] [login] user openid: ', res.result.openid)
-        app.globalData.openid = res.result.openid
-        wx.navigateTo({
-          url: '../userConsole/userConsole',
-        })
-      },
-      fail: err => {
-        console.error('[云函数] [login] 调用失败', err)
-        wx.navigateTo({
-          url: '../deployFunctions/deployFunctions',
-        })
-      }
-    })
-  },
-
-  // 上传图片
-  doUpload: function () {
-    // 选择图片
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-
-        wx.showLoading({
-          title: '上传中',
-        })
-
-        const filePath = res.tempFilePaths[0]
-        
-        // 上传图片
-        const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
-        wx.cloud.uploadFile({
-          cloudPath,
-          filePath,
-          success: res => {
-            console.log('[上传文件] 成功：', res)
-
-            app.globalData.fileID = res.fileID
-            app.globalData.cloudPath = cloudPath
-            app.globalData.imagePath = filePath
-            
-            wx.navigateTo({
-              url: '../storageConsole/storageConsole'
-            })
-          },
-          fail: e => {
-            console.error('[上传文件] 失败：', e)
-            wx.showToast({
-              icon: 'none',
-              title: '上传失败',
-            })
-          },
-          complete: () => {
-            wx.hideLoading()
-          }
-        })
-
-      },
-      fail: e => {
-        console.error(e)
-      }
-    })
-  },
-
 })
