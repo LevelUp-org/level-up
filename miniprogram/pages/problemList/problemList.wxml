@@ -1,0 +1,16 @@
+<view>
+	<view class="index-bd">
+		<recycle-view class="list" batch="{{batchSetRecycleData}}" id="recycleId">
+			<view slot="before" class="header">下拉刷新</view>
+			<recycle-item class='item' wx:for="{{recycleList}}" wx:key="id">
+			<navigator url="/pages/problem/problem?title={{item.title}}&content={{item.content}}" class="kind-list-item-hd">
+				<view class="list-item" >
+					<!-- <towxml nodes="{{item}}"/> -->
+					{{index + 1}}. {{item.title}}
+				</view>
+				</navigator>
+			</recycle-item>
+			<view class="header" slot="after">下面还有</view>
+		</recycle-view>
+	</view>
+</view>

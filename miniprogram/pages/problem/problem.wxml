@@ -1,0 +1,27 @@
+<view>
+	<view class="page-contanier">
+
+		<towxml nodes="{{htmlSnip}}"/>
+
+		<!-- <view class="header kind-list-item title">
+			{{'javascript的typeof返回哪些数据类型？'}}
+		</view> -->
+
+		<view class="header kind-list-item answer show_issue {{showAnswer ? 'show_answer' : ''}}" bindtap="showAnswer">
+			<mp-icon style="display: {{showAnswer ? 'none' : ''}}" class="sticker" icon="sticker" size="{{16}}"></mp-icon>
+			<text>{{!showAnswer ? '点我显示答案' : answer}}</text>
+		</view>
+
+		<view class="bottom_view">
+			<view class="header kind-list-item bottom_item">
+				上一题
+			</view>
+			<view class="header kind-list-item bottom_item">
+				<mp-icon class="like" icon="like" outline='field' color="#000" size="{{16}}"></mp-icon>
+			</view>
+			<view class="header kind-list-item bottom_item">
+				下一题
+			</view>
+		</view>
+	</view>
+</view>

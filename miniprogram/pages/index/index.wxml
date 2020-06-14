@@ -11,8 +11,8 @@
 					</view>
 					<view class="kind-list-item-bd {{typeObj.open ? 'kind-list-item-bd-show' : ''}}">
 						<view class="navigator-box {{typeObj.open ? 'navigator-box-show' : ''}}">
-							<block wx:for-items="{{typeObj.items}}" wx:for-item="item" wx:key="{{index + 1}}">
-								<navigator url="" class="navigator">
+							<block wx:for-items="{{typeObj.items}}" wx:for-item="item" wx:key="idx" wx:key="{{idx}}">
+								<navigator url="/pages/problem/problem" class="navigator">
 									<view class="navigator-text" style="color: {{item.color}}">{{item.name}}</view>
 									<view class="arrow-view">
                     {{item.count}}
