@@ -1,7 +1,7 @@
 @import "../../style/index.wxss";
 
 .page-contanier {
-  
+  padding: 8px 16px;
 }
 
 .header {
@@ -34,6 +34,8 @@
 
 .show_answer {
   height: auto;
+  display: block;
+  padding: 8px 16px;
   /* transform: scale(1%); */
   /* transition: .3s; */
 }

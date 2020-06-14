@@ -1,5 +1,5 @@
 <view>
-	<view class="page-contanier">
+	<view class="index-bd">
 
 		<towxml nodes="{{htmlSnip}}"/>
 
