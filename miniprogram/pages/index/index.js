@@ -6,73 +6,17 @@ Page({
     list: [
       {
         id: 0,
-        type: 'Web',
-        name: 'Web',
+        type: 'HTML',
+        name: 'HTML',
         open: true,
         items: [
           {
-            type: 'css',
-            name: 'css',
+            type: 'HTML',
+            name: 'HTML',
             count: 198,
           },
-          {
-            type: 'js',
-            name: 'js',
-            count: 190,
-          },
-          {
-            type: 'html',
-            name: 'html',
-            count: 190,
-          },
-          {
-            type: 'react',
-            name: 'react',
-            count: 190,
-          },
-          {
-            type: 'Vue',
-            name: 'Vue',
-            count: 190,
-          }
         ]
-      },
-      {
-        id: 1,
-        type: 'Hybrid',
-        name: 'Hybrid',
-        open: false,
-        items: [
-          {
-            type: 'Flutter',
-            name: 'Flutter',
-            count: 190,
-          },
-          {
-            type: 'react-native',
-            name: 'react-native',
-            count: 190,
-          },
-        ]
-      },
-      {
-        id: 2,
-        type: 'Native',
-        name: 'Native',
-        open: false,
-        items: [
-          {
-            type: 'iOS',
-            name: 'iOS',
-            count: 190,
-          },
-          {
-            type: 'Android',
-            name: 'Android',
-            count: 19112,
-          }
-        ]
-      },
+      }
     ]
   },
 

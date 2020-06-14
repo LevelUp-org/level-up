@@ -13,7 +13,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    recycleList: []
+    recycleList: [],
+    pageNo: 0
   },
 
   /**
@@ -27,7 +28,7 @@ Page({
     wx.getSystemInfo({
       success: (res) => {
         this._windowWidth = res.windowWidth;
-        this.getData();
+        this.getData(0);
       },
     })
   },
@@ -58,15 +59,20 @@ Page({
 
   onReachBottom() {
     console.log('onReachBottom ====>');
+
+    this.getData(this.data.pageNo);
   },
 
   onPageScroll(e) {},
 
-  getData() {
+  getData(pageNo) {
+
+    console.log(pageNo);
+
     wx.cloud.callFunction({
       name: 'getTopicList',
       data: {
-        pageNo: 0
+        pageNo: pageNo
       }
     }).then(res => {
       console.log("=========>", res);
@@ -83,6 +89,9 @@ Page({
         // this.ctx.append(appendArr)
 
         this.ctx.append(data)
+        this.setData({
+          pageNo: pageNo + 1
+        });
       } else {
       // } else {
 
